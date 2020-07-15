@@ -1,34 +1,34 @@
 let tasks = [{
     id: 0,
-    name: "Купить фрукты",
-    date: "2020-03-10",
+    name: "Задача номер один",
+    date: "1 января 2020",
     done: false,
     deleted: false,
-    description: `Пойти на рынок и взять яблок и ананас`
+    description: `Первое описание`
   },
   {
     id: 1,
-    name: "Покормить кота",
-    date: "2020-03-10",
+    name: "Задача номер два",
+    date: "2 февраля 2020",
     done: true,
     deleted: false,
-    description: `Насыпать в миску корма`
+    description: `Второе описание`
   },
   {
     id: 2,
-    name: "Поспать",
-    date: "2020-03-10",
+    name: "Задача номер три",
+    date: "3 марта 2020",
     done: true,
     deleted: false,
-    description: `Лечь на кровать закрыть глаза спать2`
+    description: `Третье описание`
   },
   {
     id: 3,
-    name: "Выпить кофе",
-    date: "2020-03-10",
+    name: "Задача номер четыре",
+    date: "4 марта 2020",
     done: true,
     deleted: false,
-    description: `Сварить кофе налить в кружку открыть рот пить кофе`
+    description: `Четвертое описание`
   }
 ];
 
@@ -82,25 +82,36 @@ function checkValue(field) {
   }
 }
 
+
 //Функция добавления новой задачи
 btnWindow.addEventListener("click", () => {
   let taskName = document.getElementsByName("taskName")[0],
     taskDate = document.getElementsByName("taskDate")[0],
     taskDescription = document.getElementsByName("taskDescription")[0];
-  //console.log(taskName, taskDate, taskDescription);
+
 
   if (
     checkValue(taskName) &&
     checkValue(taskDate) &&
     checkValue(taskDescription)
   ) {
+    
+    const date = new Date(taskDate.value).toLocaleString("ru", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
     let newTask = {
       id: tasks.length,
       name: taskName.value,
-      date: taskDate.value,
+      date: date,
       description: taskDescription.value,
       done: false
     }; // Создаем объект задачи
+
+    
+    console.log(date);
     tasks.push(newTask); // Заталкиваем в конец массива объект задачи
     renderTasks(itemsListParent, tasks); // Рисуем задачу
     closeModal(modalAddTask); //Закрываем окно
